@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Hexagono(
                 color: kMerchHexagonColor,
                 onTap: (){
-                  GameBrain().loadSharedPrefs();
+                  GameBrain().deleteSavedPref();
                 },
               ),
             ),
