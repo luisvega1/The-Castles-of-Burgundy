@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  shared_preferences: any
   shape_of_view:
   font_awesome_flutter: ^8.5.0
   flutter:
