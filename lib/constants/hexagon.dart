@@ -7,13 +7,14 @@ int colour;
 var _data=1;
 
 class Hexagono extends StatelessWidget {
-  Hexagono({this.onTap, this.hexColor, this.state,  @required this.color, this.puntos, this.castillo});
+  Hexagono({this.onTap, this.image, this.hexColor, this.state,  @required this.color, this.puntos, this.castillo});
   Color color;
   String puntos;
   String castillo;  
   Function onTap;
   String state;
   Color hexColor;
+  String image;
 
   Color selectColor(String castillo) {
     Color color;
@@ -69,6 +70,10 @@ class Hexagono extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Image.asset(
+                      image != null ? 'assets/${image}' : '',
+                      width: 21,
+                    ),
                   ],
                 ),
               ),

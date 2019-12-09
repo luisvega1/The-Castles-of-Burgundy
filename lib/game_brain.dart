@@ -202,6 +202,10 @@ class GameBrain{
   var _color1;
   var _color2;
 
+  Future<String> tablero () async{
+    return json.encode(_arrayTablero);
+  }
+
   //METODO PARA COMENZAR EL JUESGO
   Future<String> initGame() async{
     sharedPref.save("board", _arrayTablero);
@@ -219,12 +223,42 @@ class GameBrain{
     checkTable();
   }
 
+  void checkColor(String color){
+    print(color);
+  }
+
+  void checkSlot(int row, int pos){
+    if(_auxArray[row][pos]['color'] == _color1 || _color2){
+      print(_auxArray[row][pos]['color']);
+    }
+  } 
+
   void checkTable() async{
     _auxArray = await setTale();
 
     for(int i = 0; i < _auxArray.length; i++){
       for(int j = 0; j < _auxArray[i].length; j++){
-        print(_auxArray[i][j]);
+        if(_auxArray[i][j]['status']=='ocupado'){
+          if(_auxArray[i][j-1]['color'] == _color1 || _color2){
+            print(_auxArray[i][j-1]['color']);
+          }
+          if(_auxArray[i][j+1]['color'] == _color1 || _color2){
+            print(_auxArray[i][j+1]['color']);
+          }
+          if(_auxArray[i-1][j-1]['color'] == _color1 || _color2){
+            print(_auxArray[i-1][j-1]['color']);
+          }
+          if(_auxArray[i-1][j]['color'] == _color1 || _color2){
+            print(_auxArray[i-1][j]['color']);
+          }
+          if(_auxArray[i+1][j]['color'] == _color1 || _color2){
+            print(_auxArray[i+1][j]['color']);
+          }
+          if(_auxArray[i+1][j+1]['color'] == _color1 || _color2){
+            print(_auxArray[i+1][j+1]['color']);
+          }
+        }
+        print("posicion: ${i}${j}");
       }
     }
 
