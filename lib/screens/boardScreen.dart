@@ -214,7 +214,6 @@ class _BoardScreen extends State<BoardScreen> {
                           image: 'verde.png',
                           hexColor: _array != null ? _array[2][1]['status'] == 'ocupado' ? kBusyHexagonColor : _array[2][1]['status'] == 'libre' ? kFreeHexagonColor : kNullHexagonColor : kNullHexagonColor,
                           onTap: (){
-                            print("verga");
                             GameBrain test = GameBrain();
                             test.tap(2, 1, context).then((String s) => this.setArray(json.decode(s)) );
                           },
@@ -250,7 +249,7 @@ class _BoardScreen extends State<BoardScreen> {
                           hexColor: _array != null ? _array[2][4]['status'] == 'ocupado' ? kBusyHexagonColor : _array[2][4]['status'] == 'libre' ? kFreeHexagonColor : kNullHexagonColor : kNullHexagonColor,
                           onTap: (){
                             GameBrain test = GameBrain();
-                            test.tap(2, 4, context).then((String s) => (_array = json.decode(s)) );
+                            test.tap(2, 4, context).then((String s) => this.setArray(json.decode(s)) );
                           },
                           castillo: 'castleG',
                         ),
@@ -371,7 +370,7 @@ class _BoardScreen extends State<BoardScreen> {
                           hexColor: _array != null ? _array[4][1]['status'] == 'ocupado' ? kBusyHexagonColor : _array[4][1]['status'] == 'libre' ? kFreeHexagonColor : kNullHexagonColor : kNullHexagonColor,
                           onTap: (){
                             GameBrain test = GameBrain();
-                            test.tap(4, 1, context).then((String s) => (_array = json.decode(s)) );
+                            test.tap(4, 1, context).then((String s) => this.setArray(json.decode(s)) );
                           },
                           castillo: 'castleO',
                         ),
@@ -779,32 +778,56 @@ class _BoardScreen extends State<BoardScreen> {
                       ),
                       Container(
                         padding: EdgeInsets.all(5.0),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RaisedButton(
                               color: Color(0xFFff4f4f),
                               child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 4.0,
-                                ),
-                                Text(
-                                  'Salir',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 16.0,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 4.0,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    'Iniciar',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              onPressed: () {
+                                GameBrain().restartGame();
+                                GameBrain().initGame().then((String s) => this.setArray(json.decode(s)));
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                            RaisedButton(
+                              color: Color(0xFFff4f4f),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  Text(
+                                    'Salir',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 16.0,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                             )
                           ],
                         ),
                       )
+                    
                     ],
                   ),
                 ),
